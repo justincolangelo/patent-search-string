@@ -1,0 +1,55 @@
+<html>
+    <head>
+    	<title>Create a search string from a 7-digit patent number</title>
+    	
+    	<link rel="stylesheet" href="css/pss.css" type="text/css">
+    	
+    </head>
+    
+    <body>
+    	<div id="wrap">
+    		<div>
+    			<h1>Create a search string</h1>
+    		</div>
+    		
+    		<div id="info">		
+    			<div>
+    				<h2>Enter a 7-Digit patent number</h2>
+    				<input type="text" name="number" id="item"/>
+    				<p id="error"></p>
+    				<input type="button" id="createString" value="CREATE"/>
+    			</div>
+    		
+    			<div id="showit">
+    				<h2 id="ss"></h2>
+    				<p><span id="all"></span></p>
+    		
+    				<h2>Original</h2>
+    				<input type="text" id="or" />
+    				<h2>Quoted</h2>
+    				<input type="text" id="qu" />
+    				<h2>Quoted with commas</h2>
+    				<input type="text" id="co" />
+    				<h2>Quoted with spaces</h2>
+    				<input type="text" id="sp" />
+    				<h2>With Asterisks</h2>
+    				<input type="text" id="bo" />
+    			</div>
+    		</div>
+    		
+    		<div id="recent">
+    			<div>
+    				<h2>Recent numbers</h2>
+    			</div>
+    			<div class="container">
+    				<ul id="recents">
+    				</ul>
+    			</div>
+    		</div>
+    
+    	</div>
+    
+        <script type="text/javascript" src="js/pss.js"></script>
+        
+    </body>
+</html>

@@ -1,0 +1,50 @@
+body {
+    text-align: center; 
+    font-size: 100%;
+}
+
+#wrap {
+    margin: auto; 
+    max-width: 960px; 
+    min-width: 200px; 
+    position: relative;
+}
+
+#wrap > div > h1 {
+    border-bottom: 2px solid black; 
+    padding-bottom: 20px; 
+    margin-bottom: 20px;
+}
+
+#wrap #info {
+    width: 70%; 
+    float: left;
+}
+
+#error {
+    color: red;
+}
+
+#recent {
+    float: right; 
+    border: 1px solid black; 
+    width: 20%; 
+    height: 300px; 
+    padding: 0px 10px 10px 10px;
+}
+
+#recent > div > h2 {
+    border-bottom: 2px dotted black;
+}
+
+#recent .container {
+    overflow: scroll; 
+    height: 170px;
+}
+
+#recent #recents {
+    list-style-type: none; 
+    text-decoration: none; 
+    color: green; 
+    padding: 10px;
+}
