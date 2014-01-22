@@ -8,6 +8,8 @@ body {
     max-width: 960px; 
     min-width: 200px; 
     position: relative;
+    overflow: hidden;
+    padding: 20px;
 }
 
 #wrap > div > h1 {
@@ -35,16 +37,29 @@ body {
 
 #recent > div > h2 {
     border-bottom: 2px dotted black;
+    margin-bottom: 0;
 }
 
 #recent .container {
     overflow: scroll; 
-    height: 170px;
+    height: 220px;
 }
 
-#recent #recents {
+#recent ul#recents {
     list-style-type: none; 
     text-decoration: none; 
-    color: green; 
+    color: #222; 
     padding: 10px;
+    margin: 0;
+}
+
+#recent ul#recents li {
+    font-size: 28px;
+    cursor: pointer;
+    padding: 5px 0;
+}
+
+#recent ul#recents li:hover {
+    background: #ddd;
+    color: #444;
 }

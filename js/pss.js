@@ -4,8 +4,12 @@ var qu = document.getElementById('qu');
 var co = document.getElementById('co');   		
 var sp = document.getElementById('sp');
 var bo = document.getElementById('bo');
+var all = document.getElementById('all');
+var ss = document.getElementById('ss');
+var error = document.getElementById('error');
 var btn = document.getElementById('createString');
-var inputs = { 'or' : or, 'qu' : qu, 'co' : co, 'sp' : sp, 'bo' : bo };
+var itemInput = document.getElementById('item');
+var inputs = { 'or' : or, 'qu' : qu, 'co' : co, 'sp' : sp, 'bo' : bo, 'all' : all, 'ss' : ss, 'error' : error };
 
 showit.style.display = 'none';
 or.addEventListener('click', function(){ this.select(); });
@@ -14,16 +18,26 @@ co.addEventListener('click', function(){ this.select(); });
 sp.addEventListener('click', function(){ this.select(); });
 bo.addEventListener('click', function(){ this.select(); });
 
-btn.addEventListener('click', function(){ 
-    change();
+// Setup event listener for keyboard entry on input
+itemInput.addEventListener('keyup', function(e){
+    var key = e.which || e.keycode; 
+    if(key == 13) {
+        calculateAll(); 
+    } 
 });
 
+// Setup event listener for clicking create button
+btn.addEventListener('click', function(){ 
+    calculateAll();
+});
+
+
 /**
- *  
+ *  Calculate values for different string types
  */
- function change()
+ function calculateAll()
 {
-    var item = document.getElementById('item').value;
+    var item = itemInput.value;
      
     if(item != '')
     {
@@ -31,31 +45,31 @@ btn.addEventListener('click', function(){
     	var patt = '';
     	var w = item.replace(pattern, '');
 
-    	document.getElementById('item').value = w;
+    	item.value = w;
     	
     	var splits = w.split(patt);
 
     	if(splits.length != 7) //throw an error
     	{
-    		document.getElementById('error').innerHTML = 'There was an error in the input. Please try again.';
+    		inputs.error.innerHTML = 'There was an error in the input. Please try again.';
     		inputs.or.value = '';
     		inputs.qu.value = '';
     		inputs.co.value = '';
     		inputs.sp.value = '';
     		inputs.bo.value = '';
-    		document.getElementById('all').innerHTML = '';
+    		inputs.all.innerHTML = '';
     		showit.style.display = 'none';
     	}
     	else
     	{
     		
-    		document.getElementById('error').innerHTML = '';
-    		document.getElementById('showit').style.display = 'inline';
+    		inputs.error.innerHTML = '';
+    		showit.style.display = 'inline';
     							
-    		var qu = '"'+w+'"';
-    		var co = '"'+splits[0]+','+splits[1]+splits[2]+splits[3]+','+splits[4]+splits[5]+splits[6]+'"';
-    		var sp = '"'+splits[0]+' '+splits[1]+splits[2]+splits[3]+' '+splits[4]+splits[5]+splits[6]+'"';
-    		var bo = '*'+splits[1]+splits[2]+splits[3]+'*'+splits[4]+splits[5]+splits[6]+'*';
+    		var qu = '"' + w + '"';
+    		var co = '"' + splits[0] + ',' + splits[1] + splits[2] + splits[3] + ',' + splits[4] + splits[5] + splits[6] + '"';
+    		var sp = '"' + splits[0] + ' ' + splits[1] + splits[2] + splits[3] + ' ' + splits[4] + splits[5] + splits[6] + '"';
+    		var bo = '*' + splits[1] + splits[2] + splits[3] + '*' + splits[4] + splits[5] + splits[6] + '*';
     	
     		var at = document.createAttribute('style');
     		at.nodeValue = 'cursor: pointer; padding: 5px;';
@@ -68,14 +82,14 @@ btn.addEventListener('click', function(){
     		{
     			part.addEventListener('click', function(){
     				document.getElementById('item').value = part.innerHTML;
-    				change(this.innerHTML);
+    				calculateAll();
     			});
     		}
     		else if (part.attachEvent)
     		{
     			part.attachEvent('onclick', function(){
     				document.getElementById('item').value = part.innerHTML;
-    				change(this.innerHTML);
+    				calculateAll();
     			});
 
     		}
@@ -86,8 +100,8 @@ btn.addEventListener('click', function(){
     		inputs.co.value = co;
     		inputs.sp.value = sp;
     		inputs.bo.value = bo;
-    		document.getElementById('all').innerHTML = w+', '+qu+', '+co+', '+sp+', '+bo;
-    		document.getElementById('ss').innerHTML = 'Search String';
+    		inputs.all.innerHTML = w + ', ' + qu + ', ' + co + ', ' + sp + ', ' + bo;
+    		inputs.ss.innerHTML = 'Search String';
     		
     		codeSelect(all);
     	}
@@ -97,7 +111,7 @@ btn.addEventListener('click', function(){
 
 
 /**
- *  
+ *  Select the text for copying to clipboard
  */
 function codeSelect(all)
 {
